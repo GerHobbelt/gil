@@ -30,6 +30,11 @@
 #include "gil_config.hpp"
 #include "pixel.hpp"
 
+#ifdef BOOST_MSVC
+#pragma warning(push)
+#pragma warning(disable: 4244) // narrowing conversion
+#endif
+
 namespace boost { namespace gil {
 
 /// \defgroup ColorBaseModelPackedPixel packed_pixel 
@@ -196,4 +201,9 @@ namespace boost {
     template <typename P, typename C, typename L>
     struct has_trivial_constructor<gil::packed_pixel<P,C,L> > : public has_trivial_constructor<P> {};
 }
+
+#ifdef BOOST_MSVC
+#pragma warning(pop)
+#endif
+
 #endif

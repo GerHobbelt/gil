@@ -35,6 +35,10 @@
 #include "gil_config.hpp"
 #include "utilities.hpp"
 
+#ifdef BOOST_MSVC
+#pragma warning(push)
+#pragma warning(disable: 4244) // narrowing conversion
+#endif
 
 namespace boost { namespace gil {
 
@@ -646,5 +650,9 @@ template <typename T>
 struct base_channel_type : base_channel_type_impl<typename remove_cv<T>::type > {};
 
 }} //namespace boost::gil
+
+#ifdef BOOST_MSVC
+#pragma warning(pop)
+#endif
 
 #endif

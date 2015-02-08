@@ -34,6 +34,11 @@
 #include "gil_concept.hpp"
 #include "utilities.hpp"
 
+#ifdef BOOST_MSVC
+#pragma warning(push)
+#pragma warning(disable: 4244) // narrowing conversion
+#endif
+
 namespace boost { namespace gil {
 
 
@@ -695,5 +700,9 @@ Op static_for_each(const P1& p1,const P2& p2,const P3& p3,Op op) { return detail
 ///\}
 
 } }  // namespace boost::gil
+
+#ifdef BOOST_MSVC
+#pragma warning(pop)
+#endif
 
 #endif

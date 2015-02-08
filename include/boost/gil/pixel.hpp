@@ -35,6 +35,11 @@
 #include "utilities.hpp"
 #include "color_base_algorithm.hpp"
 
+#ifdef BOOST_MSVC
+#pragma warning(push)
+#pragma warning(disable: 4244) // narrowing conversion
+#endif
+
 namespace boost { namespace gil {
 
 // Forward-declare gray_t
@@ -213,4 +218,9 @@ namespace boost {
     template <typename ChannelValue, typename Layout> 
     struct has_trivial_constructor<gil::pixel<ChannelValue,Layout> > : public has_trivial_constructor<ChannelValue> {};
 }
+
+#ifdef BOOST_MSVC
+#pragma warning(pop)
+#endif
+
 #endif
