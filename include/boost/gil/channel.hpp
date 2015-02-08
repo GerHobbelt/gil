@@ -30,6 +30,11 @@
 #include "gil_config.hpp"
 #include "utilities.hpp"
 
+#ifdef BOOST_MSVC
+#pragma warning(push)
+#pragma warning(disable: 4244) // narrowing conversion
+#endif
+
 namespace boost { namespace gil {
 
 
@@ -349,8 +354,8 @@ protected:
 
 private:
     void set(integer_t value) const {     // can this be done faster??
-        const integer_t num_values = max_val+1;
-        this->derived().set_unsafe(((value % num_values) + num_values) % num_values); 
+        const integer_t num_vals = max_val+1;
+        this->derived().set_unsafe(((value % num_vals) + num_vals) % num_vals); 
     }
     integer_t get() const { return derived().get(); }
     const Derived& derived() const { return static_cast<const Derived&>(*this); }
@@ -668,5 +673,9 @@ template <typename BaseChannelValue, typename MinVal, typename MaxVal>
 struct is_integral<gil::scoped_channel_value<BaseChannelValue,MinVal,MaxVal> > : public is_integral<BaseChannelValue> {};
 
 }
+
+#ifdef BOOST_MSVC
+#pragma warning(pop)
+#endif
 
 #endif

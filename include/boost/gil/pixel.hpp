@@ -34,6 +34,11 @@
 #include "utilities.hpp"
 #include "color_base_algorithm.hpp"
 
+#ifdef BOOST_MSVC
+#pragma warning(push)
+#pragma warning(disable: 4244) // narrowing conversion
+#endif
+
 namespace boost { namespace gil {
 
 // Forward-declare gray_t
@@ -123,7 +128,7 @@ public:
     pixel&                       operator=(const pixel& p)       { static_copy(p,*this); return *this; }
 
     // Construct from another compatible pixel type
-    template <typename Pixel>    pixel(const Pixel& p, typename enable_if_c<is_pixel<Pixel>::value>::type* dummy = 0) : parent_t(p) { 
+    template <typename Pixel>    pixel(const Pixel& p, typename enable_if_c<is_pixel<Pixel>::value>::type* = 0) : parent_t(p) { 
         check_compatible<Pixel>();
     }   
 
@@ -211,4 +216,9 @@ namespace boost {
     template <typename ChannelValue, typename Layout> 
     struct has_trivial_constructor<gil::pixel<ChannelValue,Layout> > : public has_trivial_constructor<ChannelValue> {};
 }
+
+#ifdef BOOST_MSVC
+#pragma warning(pop)
+#endif
+
 #endif

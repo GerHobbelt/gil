@@ -31,6 +31,11 @@
 #include <boost/mpl/and.hpp>
 #include <boost/mpl/size.hpp>
 
+#ifdef BOOST_MSVC
+#pragma warning(push)
+#pragma warning(disable: 4510 4512 4610) // none-copyable, non-instantiatible type
+#endif
+
 namespace boost { namespace gil {
 template <typename T> struct channel_traits;
 template <typename P> struct is_pixel;
@@ -2183,5 +2188,9 @@ struct ImageConcept {
 
 
 } }  // namespace boost::gil
+
+#ifdef BOOST_MSVC
+#pragma warning(pop)
+#endif
 
 #endif

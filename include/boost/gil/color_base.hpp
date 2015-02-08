@@ -33,6 +33,11 @@
 #include "utilities.hpp"
 #include "gil_concept.hpp"
 
+#ifdef BOOST_MSVC
+#pragma warning(push)
+#pragma warning(disable: 4512) // assignment operator could not be generated
+#endif
+
 namespace boost { namespace gil {
 
 // Forward-declare
@@ -406,5 +411,9 @@ void swap(detail::homogeneous_color_base<E,L,N>& x, detail::homogeneous_color_ba
 
 
 } }  // namespace boost::gil
+
+#ifdef BOOST_MSVC
+#pragma warning(pop)
+#endif
 
 #endif
