@@ -169,7 +169,7 @@ private:
     template <typename Img> void basic_test(const string& prefix);
     template <typename View> void view_transformations_test(const View& img_view, const string& prefix);
     template <typename View> void homogeneous_view_transformations_test(const View& img_view, const string& prefix, mpl::true_);
-    template <typename View> void homogeneous_view_transformations_test(const View& img_view, const string& prefix, mpl::false_) {}
+    template <typename View> void homogeneous_view_transformations_test(const View& /*img_view*/, const string& /*prefix*/, mpl::false_) {}
     template <typename View> void histogram_test(const View& img_view, const string& prefix);
     void virtual_view_test();
     void packed_image_test();
@@ -397,7 +397,7 @@ void checksum_image_test::initialize() {
     string crc_name; 
     boost::crc_32_type::value_type crc_result;
     fstream checksum_ref(_filename,ios::in);
-    while (true) {
+    for (;;) {
         checksum_ref >> crc_name >> std::hex >> crc_result;
         if(checksum_ref.fail()) break;
         _crc_map[crc_name]=crc_result;
@@ -567,7 +567,7 @@ void test_image(const char* ref_checksum) {
     static_checks();
 }
 
-int main(int argc, char* argv[]) {
+int main(int, char* []) {
 
     const char* local_name = "gil_reference_checksums.txt";
     const char* name_from_status = "../libs/gil/test/gil_reference_checksums.txt";
