@@ -102,7 +102,7 @@ void test_pixel_iterator() {
 
     // a buffer of 7 bytes fits exactly 8 BGR232 pixels.
     unsigned char pix_buffer[7];    
-    std::fill(pix_buffer,pix_buffer+7,0);
+    std::fill(pix_buffer,pix_buffer+7,static_cast<unsigned char>(0u));
     bgr232_ptr_t pix_it(&pix_buffer[0],0);  // start at bit 0 of the first pixel
     for (int i=0; i<8; ++i) {
         *pix_it++ = red;

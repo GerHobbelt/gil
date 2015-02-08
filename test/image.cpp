@@ -240,7 +240,7 @@ void image_test::histogram_test(const View& img_view, const string& prefix) {
 //  vector<int> histogram(255,0);
 //  get_hist(cropped,histogram.begin());
     unsigned char histogram[256];
-    fill(histogram,histogram+256,0);
+    fill(histogram,histogram+256,static_cast<unsigned char>(0u));
     get_hist(img_view,histogram);
     gray8c_view_t hist_view=interleaved_view(256,1,(const gray8_pixel_t*)histogram,256);
     check_view(hist_view,prefix+"histogram");

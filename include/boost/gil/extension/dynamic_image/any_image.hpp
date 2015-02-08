@@ -45,6 +45,8 @@ namespace detail {
 
         recreate_image_fnobj(const point2<std::ptrdiff_t>& dims, unsigned alignment) : _dimensions(dims), _alignment(alignment) {}
         template <typename Image> result_type operator()(Image& img) const { img.recreate(_dimensions,_alignment); }
+    private:
+        recreate_image_fnobj& operator=(const recreate_image_fnobj&);
     };
 
     template <typename AnyView>  // Models AnyViewConcept

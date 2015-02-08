@@ -29,6 +29,11 @@
 #include "gil_config.hpp"
 #include "pixel.hpp"
 
+#ifdef BOOST_MSVC
+#pragma warning(push)
+#pragma warning(disable: 4244) // narrowing conversion
+#endif
+
 namespace boost { namespace gil {
 
 /// \defgroup ColorBaseModelPackedPixel packed_pixel 
@@ -74,7 +79,7 @@ struct packed_pixel {
 
     // Construct from another compatible pixel type
     packed_pixel(const packed_pixel& p) : _bitfield(p._bitfield) {}
-    template <typename P> packed_pixel(const P& p, typename enable_if_c<is_pixel<P>::value>::type* d=0)            { check_compatible<P>(); static_copy(p,*this); }   
+    template <typename P> packed_pixel(const P& p, typename enable_if_c<is_pixel<P>::value>::type* =0)            { check_compatible<P>(); static_copy(p,*this); }   
     packed_pixel(int chan0, int chan1) : _bitfield(0) { 
         BOOST_STATIC_ASSERT((num_channels<packed_pixel>::value==2)); 
         at_c<0>(*this)=chan0; at_c<1>(*this)=chan1; 
@@ -190,4 +195,9 @@ namespace boost {
     template <typename P, typename C, typename L>
     struct has_trivial_constructor<gil::packed_pixel<P,C,L> > : public has_trivial_constructor<P> {};
 }
+
+#ifdef BOOST_MSVC
+#pragma warning(pop)
+#endif
+
 #endif
