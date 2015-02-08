@@ -59,6 +59,10 @@ struct absolute_value<T, false>
     }
 };
 
+#ifdef BOOST_MSVC
+#pragma warning(disable: 4756) // overflow in constant arithmetic
+#endif
+
 template
     <
         typename Integral,

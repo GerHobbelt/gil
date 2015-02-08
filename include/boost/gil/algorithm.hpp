@@ -45,6 +45,7 @@
 #ifdef _MSC_VER
 #pragma warning(push)
 #pragma warning(disable : 4127) // conditional expression is constant
+#pragma warning(disable : 4701) // potentially uninitialized local variable 'y' used
 #endif
 
 namespace boost { namespace gil {
