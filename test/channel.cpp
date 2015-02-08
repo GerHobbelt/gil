@@ -46,6 +46,8 @@ struct do_test : public ChannelTestCore {
         error_if(this->_max_v != channel_traits<channel_t>::max_value());
     }
 
+    do_test& operator= (const do_test&);
+	
     void test_all() {
         test_channel_invert();
         test_channel_convert();
@@ -173,6 +175,8 @@ protected:
     reference_core() : parent_t(), _min_v(parent_t::_min_v), _max_v(parent_t::_max_v) {
         boost::function_requires<ChannelConcept<ChannelRef> >();
     }
+
+    reference_core& operator=(const reference_core&);
 };
 
 // For subbyte channel references we need to store the bit buffers somewhere
@@ -357,7 +361,7 @@ void test_channel() {
     do_test<reference_core<const channel_archetype&> >();
 }
 
-int main(int argc, char* argv[]) {
+int main(int, char* []) {
     test_channel();
     return 0;
 }

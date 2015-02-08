@@ -58,6 +58,7 @@ struct do_basic_test : public C1, public C2 {
     typedef pixel1_value_t pixel_value_t;
 
     do_basic_test(const pixel_value_t& v) : C1(v), C2(v) {}
+	do_basic_test& operator=(const do_basic_test&);
 
     void test_all() {
         test_heterogeneous();
@@ -159,6 +160,8 @@ public:
     reference_core(const typename pixel_t::value_type& val) : parent_t(val), _pixel(parent_t::_pixel) {
         boost::function_requires<PixelConcept<pixel_t> >();
     }
+
+    reference_core& operator=(const reference_core&);
 };
 
 
@@ -186,7 +189,7 @@ struct for_each_impl {
 
 template <typename Vector, typename Fun>
 struct for_each_impl<Vector,Fun,-1> {
-    static void apply(Fun fun) {}
+    static void apply(Fun) {}
 };
 
 template <typename Vector, typename Fun>
@@ -326,7 +329,7 @@ void test_pixel() {
     error_if(g16 != 8);
 }
 
-int main(int argc, char* argv[]) {
+int main(int, char* []) {
     test_pixel();
     return 0;
 }
