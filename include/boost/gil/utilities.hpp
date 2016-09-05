@@ -179,7 +179,9 @@ inline T align(T val, std::size_t alignment) {
 ///
 template <typename ConstT, typename Value, typename Reference, typename ConstReference,
           typename ArgType, typename ResultType, bool IsMutable>
-struct deref_base : public std::unary_function<ArgType, ResultType> {
+struct deref_base {
+    typedef ArgType        argument_type;
+    typedef ResultType     result_type;
     typedef ConstT         const_t;
     typedef Value          value_type;
     typedef Reference      reference;
@@ -260,7 +262,7 @@ copy_n(InputIter first, Size count, OutputIter result) {
 
 /// \brief identity taken from SGI STL.
 template <typename T> 
-struct identity : public std::unary_function<T,T> {
+struct identity {
     const T& operator()(const T& val) const { return val; }
 };
 
@@ -268,7 +270,7 @@ struct identity : public std::unary_function<T,T> {
 
 /// \brief plus function object whose arguments may be of different type.
 template <typename T1, typename T2>
-struct plus_asymmetric : public std::binary_function<T1,T2,T1> {
+struct plus_asymmetric {
     T1 operator()(T1 f1, T2 f2) const {
         return f1+f2;
     }
@@ -278,7 +280,7 @@ struct plus_asymmetric : public std::binary_function<T1,T2,T1> {
 
 /// \brief operator++ wrapped in a function object
 template <typename T>
-struct inc : public std::unary_function<T,T> {
+struct inc {
     T operator()(T x) const { return ++x; }
 };
 
@@ -286,7 +288,7 @@ struct inc : public std::unary_function<T,T> {
 
 /// \brief operator-- wrapped in a function object
 template <typename T>
-struct dec : public std::unary_function<T,T> {
+struct dec {
     T operator()(T x) const { return --x; }
 };
 

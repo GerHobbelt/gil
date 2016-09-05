@@ -1109,7 +1109,7 @@ struct PixelDereferenceAdaptorConcept {
 };
 
 template <typename P>
-struct PixelDereferenceAdaptorArchetype : public std::unary_function<P, P> {
+struct PixelDereferenceAdaptorArchetype {
     typedef PixelDereferenceAdaptorArchetype const_t;
     typedef typename remove_reference<P>::type value_type;
     typedef typename add_reference<P>::type reference;

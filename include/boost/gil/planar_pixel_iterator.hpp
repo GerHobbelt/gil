@@ -116,7 +116,7 @@ private:
 
     void increment()            { static_transform(*this,*this,detail::inc<ChannelPtr>()); }
     void decrement()            { static_transform(*this,*this,detail::dec<ChannelPtr>()); }
-    void advance(ptrdiff_t d)   { static_transform(*this,*this,std::bind2nd(detail::plus_asymmetric<ChannelPtr,ptrdiff_t>(),d)); }
+    void advance(ptrdiff_t d)   { static_transform(*this,*this,std::bind(detail::plus_asymmetric<ChannelPtr,ptrdiff_t>(), std::placeholders::_1, d)); }
     reference dereference() const { return this->template deref<reference>(); }
 
     ptrdiff_t distance_to(const planar_pixel_iterator& it) const { return gil::at_c<0>(it)-gil::at_c<0>(*this); }
