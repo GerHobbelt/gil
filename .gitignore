@@ -41,3 +41,11 @@ graph_info.json
 # clangd
 compile_commands.json
 .clangd/
+
+# Bazel
+!BUILD.bazel
+/bazel-*
+/external
+/.cache
+/compile_commands.json
+user.bazelrc
