@@ -30,7 +30,11 @@
 #ifndef BOOST_GIL_EXTENSION_IO_ZLIB_C_LIB_COMPILED_AS_CPLUSPLUS
     extern "C" {
 #endif
-    #include <zlib.h>
+        #if __has_include(<zlib-ng.h>)
+            #include <zlib-ng.h>
+        #else
+            #include <zlib.h>
+        #endif
 #ifndef BOOST_GIL_EXTENSION_IO_ZLIB_C_LIB_COMPILED_AS_CPLUSPLUS
     }
 #endif
