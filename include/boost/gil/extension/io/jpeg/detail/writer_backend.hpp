@@ -167,7 +167,7 @@ protected:
 
     static void error_exit( j_common_ptr cinfo )
     {
-        writer_backend< Device, jpeg_tag >* mgr = reinterpret_cast< writer_backend< Device, jpeg_tag >* >( cinfo->client_data );
+        writer_backend< Device, jpeg_tag >* mgr = reinterpret_cast< writer_backend< Device, jpeg_tag >* >( cinfo->client_data_ref );
 
         longjmp( mgr->_mark, 1 );
     }
